@@ -20,6 +20,7 @@ int main() {
         } else if (pid2 == 0) {
             // Biloban gaude
             printf("Biloba nahiz (PID: %d, PPID: %d)\n", getpid(), getppid());
+            return 0;
         }
 
     } else {
