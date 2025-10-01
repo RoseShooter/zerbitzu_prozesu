@@ -31,7 +31,6 @@ public class FibonnacciThread extends Thread {
         int fbNum1 = 1;
         int fbNum2 = 1;
         
-        // Print first two numbers
         System.out.print(fbNum1);
         if (n >= 2) {
             System.out.print(" " + fbNum2);
@@ -45,17 +44,17 @@ public class FibonnacciThread extends Thread {
             fbNum1 = fbNum2;
             fbNum2 = fbResult;
         }
-        System.out.println(); // Add new line at the end
+        System.out.println(); 
         
         scanner.close();
     }
     
     public static void main(String[] args) {
-        // You need to create and start the thread
+        
         FibonnacciThread fibThread = new FibonnacciThread();
         fibThread.start();
         
-        // Wait for the thread to complete
+        
         try {
             fibThread.join();
         } catch (InterruptedException e) {
