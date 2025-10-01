@@ -22,39 +22,16 @@ public class MilioiaContatuThread {
         Thread thread4 = new Thread(new BatuketaEgin(kontaketa));
         
         thread1.start();
-        
-        
-        
-        
+        thread2.start();
+        thread3.start();
+        thread4.start();
+
         try {
             thread1.join();
-            thread2.start();
-            
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        
-        try {
-            
             thread2.join();
-            thread3.start();
-           
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        
-        try {
-           
             thread3.join();
-            thread4.start();
-          
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        
-        try {
-            
             thread4.join();
+            
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -67,7 +44,7 @@ public class MilioiaContatuThread {
 class Kontaketa{
     private int count = 0;
     
-    public void gehitu(){
+    public synchronized void gehitu(){
         count++;
     }
     
