@@ -65,7 +65,7 @@ class Kontaketa {
 
     private int count = 0;
 
-    public synchronized void gehitu() {
+    public void gehitu() {
         count++;
     }
 

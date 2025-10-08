@@ -2,18 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package procuderconsumer;
+package producerconsumersemaphore;
+
+import static java.lang.Thread.sleep;
+import java.util.concurrent.Semaphore;
 
 /**
  *
  * @author mirei
  */
-public class ProcuderConsumer {
+public class ProducerConsumerSemaphore {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Semaphore sem = new Semaphore(1);
         
         StockStore s = new StockStore(10);
         
@@ -26,39 +30,19 @@ public class ProcuderConsumer {
         Consumer c2 = new Consumer(s, "Consumer-2");
         Consumer c3 = new Consumer(s, "Consumer-3");
         
-        try {
-            // Start all threads
-            p1.start();
-            p2.start();
-            c1.start();
-            c2.start();
-            c3.start();
+        Runnable task = () -> {
+            try {
+                sem.acquire();
+                
             
-            // Let the program run for 20 seconds
-            Thread.sleep(20000);
-            
-            // Interrupt all threads
-            p1.interrupt();
-            p2.interrupt();
-            c1.interrupt();
-            c2.interrupt();
-            c3.interrupt();
-            
-            // Wait for threads to finish
-            p1.join();
-            p2.join();
-            c1.join();
-            c2.join();
-            c3.join();
-            
-        } catch (InterruptedException ex) {
-            System.out.println(ex.getMessage());
         }
         
         System.out.println("Program completed after 20 seconds");
     }
+    }
     
 }
+
 
 class StockStore {
     private char store[];
@@ -119,7 +103,10 @@ class StockStore {
         isEmpty = false;
         notifyAll();
     }
-   
+    
+    public synchronized int getCurrentSize(){
+        return next;
+    }
 }
 
 class Producer extends Thread {
@@ -138,7 +125,7 @@ class Producer extends Thread {
             char c = words.charAt((int) (Math.random() * words.length()));
             // Produce
             store.produce(c);
-            System.out.println(name + " added char '" + c + "' to store");
+            System.out.println(name + " added char '" + c + "' to store (size: " + store.getCurrentSize() + ")");
             try {
                 // wait between 0 and 4 seconds 
                 sleep((int) (Math.random() * 4000));
@@ -160,7 +147,7 @@ class Consumer extends Thread {
         while (true) {
             // Consume
             char c= store.consume();
-            System.out.println(name + " got char '" + c + "' from store");
+            System.out.println(name + " got char '" + c + "' from store (size:" + store.getCurrentSize() + ")");
             try {
                 // wait between 0 and 4 seconds 
                 sleep((int) (Math.random() * 4000));
