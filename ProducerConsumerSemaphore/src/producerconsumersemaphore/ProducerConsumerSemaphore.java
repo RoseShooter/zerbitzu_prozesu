@@ -30,10 +30,34 @@ public class ProducerConsumerSemaphore {
         Consumer c2 = new Consumer(s, "Consumer-2");
         Consumer c3 = new Consumer(s, "Consumer-3");
 
+        p1.start();
+        p2.start();
+        c1.start();
+        c2.start();
+        c3.start();
 
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
-        System.out.println("Program completed after 20 seconds");
+        System.out.println("Stoping all threads...");
+
+        p1.interrupt();
+        p2.interrupt();
+        c1.interrupt();
+        c2.interrupt();
+        c3.interrupt();
+        
+        try{
+            p1.join();
+            p2.join();
+            c1.join();
+            c2.join();
+            c3.join();
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+        }
     }
 }
-
-

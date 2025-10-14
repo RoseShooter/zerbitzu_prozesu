@@ -10,7 +10,7 @@ import static java.lang.Thread.sleep;
  *
  * @author mirei
  */
-public class Producer extends Thread{
+public class Producer extends Thread {
 
     private StockStore store;
     private final String words = "abcdefghijklmnopqrstuvxyz";
@@ -22,16 +22,18 @@ public class Producer extends Thread{
     }
 
     public void run() {
-        while (true) {
-            // Get randomly words
-            char c = words.charAt((int) (Math.random() * words.length()));
-            // Produce
-            store.produce(c);
-            System.out.println(name + " added char '" + c + "' to store");
+        while (!Thread.currentThread().isInterrupted()) {
             try {
+                // Get randomly words
+                char c = words.charAt((int) (Math.random() * words.length()));
+                // Produce
+                store.produce(c);
+                System.out.println(name + " added char '" + c + "' to store");
                 // wait between 0 and 4 seconds 
                 sleep((int) (Math.random() * 4000));
             } catch (InterruptedException e) {
+                Thread.currentThread().isInterrupted();
+                break;
             }
         }
     }

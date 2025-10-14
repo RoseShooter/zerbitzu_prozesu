@@ -20,15 +20,16 @@ public class Consumer extends Thread{
         this.name = name;
     }
 
-    public void run() {
-        while (true) {
+    public void run(){
+        while (!Thread.currentThread().isInterrupted()) {
             // Consume
-            char c = store.consume();
-            System.out.println(name + " got char '" + c + "' from store");
             try {
+                char c = store.consume();
+                System.out.println(name + " got char '" + c + "' from store");
                 // wait between 0 and 4 seconds 
                 sleep((int) (Math.random() * 4000));
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 break;
             }
         }
