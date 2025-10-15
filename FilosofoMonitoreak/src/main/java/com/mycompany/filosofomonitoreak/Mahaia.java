@@ -19,28 +19,31 @@ public class Mahaia {
         }
     }
     
+    private int ezkerZotza(int i){
+        return i;
+    }
+    
+    private int eskumaZotza(int i){
+        return i == 0 ? zotzak.length - 1 : i - 1;
+    }
+  
+    
     public synchronized void hartuZotzak(int filosofoId) throws InterruptedException {
-        
-        int ezkerZotza = filosofoId;
-        int eskumaZotza = (filosofoId + 1) % FILOSOFO_KOP;
-        
+            
         // Itzaron bi zotzak libre egon arte
-        while(!zotzak[ezkerZotza] || !zotzak[eskumaZotza]){
+        while(!zotzak[ezkerZotza(filosofoId)] || !zotzak[eskumaZotza(filosofoId)]){
             wait();
         }
         
         // Bi zotzak artuta daude
-        zotzak[ezkerZotza] = false;
-        zotzak[eskumaZotza] = false;
+        zotzak[ezkerZotza(filosofoId)] = false;
+        zotzak[eskumaZotza(filosofoId)] = false;
     }
     
     public synchronized void hutsiZotzak(int filosofoId){
-        int ezkerZotza = filosofoId;
-        int eskumaZotza = (filosofoId + 1) % FILOSOFO_KOP;
-        
         // Hutsi bi zotzak
-        zotzak[ezkerZotza] = true;
-        zotzak[eskumaZotza] = true;
+        zotzak[ezkerZotza(filosofoId)] = true;
+        zotzak[eskumaZotza(filosofoId)] = true;
         
         // Itzaroten dauden guztiei abisatu zotzak libre daudela
         notifyAll();
