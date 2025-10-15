@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package sum1msem;
+package sum1mthread;
+
 /**
  *
  * @author mirei
  */
-public class Sum1MSem {
+public class Sum1MThread {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        SharedSumTotal shared = new SharedSumTotal();
+         SharedTotalSum shared = new SharedTotalSum();
         
         SumThread s1 = new SumThread(1, 250000, shared);
         SumThread s2 = new SumThread(250001, 500000, shared);
@@ -41,8 +41,7 @@ public class Sum1MSem {
         }
         
         System.out.print("Emaitza totala; " + shared.getSum());
-                
-        
+              
     }
     
 }

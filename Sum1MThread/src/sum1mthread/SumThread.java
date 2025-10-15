@@ -2,19 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sum1msem;
+package sum1mthread;
 
 /**
  *
  * @author mirei
  */
-public class SumThread implements Runnable {
-
+public class SumThread implements Runnable{
     int min, max;
-    SharedSumTotal shared;
+    SharedTotalSum shared;
     long sum;
 
-    public SumThread(int min, int max, SharedSumTotal shared) {
+    public SumThread(int min, int max, SharedTotalSum shared) {
         this.min = min;
         this.max = max;
         this.shared = shared;
@@ -31,5 +30,4 @@ public class SumThread implements Runnable {
             System.getLogger(SumThread.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-
 }
