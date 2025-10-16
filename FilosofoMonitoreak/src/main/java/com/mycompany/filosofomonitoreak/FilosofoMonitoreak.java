@@ -13,10 +13,9 @@ public class FilosofoMonitoreak {
     public static void main(String[] args) throws InterruptedException{
         Mahaia mahaia = new Mahaia();
         
-        // 5 Filosofo sortu
-        Filosofoa[] filosofoak = new Filosofoa[5];
+        Thread[] filosofoak = new Thread[5];
         for(int i = 0; i < 5; i++){
-            filosofoak[i] = new Filosofoa(mahaia, i);
+            filosofoak[i] = new Thread(new Filosofoa(mahaia, i));
             filosofoak[i].start();
         }
         
@@ -24,12 +23,12 @@ public class FilosofoMonitoreak {
         Thread.sleep(20000);
         
         //Filosofo guztiak gelditu
-        for(Filosofoa f : filosofoak){
+        for(Thread f : filosofoak){
             f.interrupt();
         }
         
         // Itzaron guztiak amaitu arte
-        for(Filosofoa f : filosofoak){
+        for(Thread f : filosofoak){
             f.join(1000);
         }
         
