@@ -40,7 +40,7 @@ public class Mahaia {
         zotzak[eskumaZotza(filosofoId)] = false;
     }
     
-    public void hutsiZotzak(int filosofoId){
+    public synchronized void hutsiZotzak(int filosofoId){
         // Hutsi bi zotzak
         zotzak[ezkerZotza(filosofoId)] = true;
         zotzak[eskumaZotza(filosofoId)] = true;
