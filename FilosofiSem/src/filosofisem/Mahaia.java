@@ -46,6 +46,7 @@ public class Mahaia {
             zotzak[ezkerZotza(filosofoId)] = false;
 
             try {
+                // Saiatu eskumako zotza hartzen
                 if (zotzakSem[eskumaZotza(filosofoId)].tryAcquire()) {
                     zotzak[eskumaZotza(filosofoId)] = false;
                     biZotzakHartu = true;
@@ -53,9 +54,11 @@ public class Mahaia {
                     throw new InterruptedException("Eskumako zotza ez dago eskuragarri");
                 }
             } catch (InterruptedException e) {
+                //Ezin izan bada eskumakoa hartu ezkerrekoa askatu
                 zotzakSem[ezkerZotza(filosofoId)].release();
                 zotzak[ezkerZotza(filosofoId)] = true;
                 
+                // Hutsi lekua besteei
                 mahaiSem.release();
             } 
 
@@ -72,6 +75,6 @@ public class Mahaia {
         zotzak[ezkerZotza(filosofoId)] = true;
         zotzakSem[ezkerZotza(filosofoId)].release();
         
-        mahaiSem.release(); // Release table permit
+        mahaiSem.release();
     }
 }

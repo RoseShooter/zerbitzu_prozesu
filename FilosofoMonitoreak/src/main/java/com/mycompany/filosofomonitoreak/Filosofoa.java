@@ -9,7 +9,7 @@ import java.util.Random;
  *
  * @author mirei
  */
-public class Filosofoa extends Thread {
+public class Filosofoa implements Runnable {
     private Mahaia mahaia;
     private int id;
     private Random random = new Random();
@@ -19,6 +19,7 @@ public class Filosofoa extends Thread {
         this.id = id;
     }
     
+    @Override
     public void run(){
         try{
             while(true){
@@ -36,7 +37,7 @@ public class Filosofoa extends Thread {
                 Thread.sleep(random.nextInt(3000) + 1000);
                 
                 
-                // Hutsi jaten
+                // Hutsi jaten gizonak direlako eta ezin dutelako bi gauza aldi berean egin
                 mahaia.hutsiZotzak(id);
             }
         } catch (InterruptedException e){
