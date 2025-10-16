@@ -37,6 +37,7 @@ public class Filosofoa implements Runnable{
                 System.out.println("Filosofo " + id + " jaten ari da.");
                 Thread.sleep(random.nextInt(3000) + 1000);
                 
+                // Hasi pentsatzen
                 mahaia.utziZotzak(id);
                 
             }

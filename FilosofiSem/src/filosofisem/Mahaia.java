@@ -57,7 +57,6 @@ public class Mahaia {
                 zotzak[ezkerZotza(filosofoId)] = true;
                 
                 mahaiSem.release();
-                Thread.sleep(100);
             } 
 
         }
