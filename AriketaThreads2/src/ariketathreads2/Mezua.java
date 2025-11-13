@@ -4,13 +4,19 @@
  */
 package ariketathreads2;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author mirei
  */
 public class Mezua {
     
-    public synchronized void mezuaInprimatu(int kop){
+    Semaphore sem = new Semaphore(1);
+    
+    public void mezuaInprimatu(int kop) throws InterruptedException{
+        sem.acquire(1);
         System.out.println("Kaixo, " + kop + " thread-a naiz eta exekutatzen nabil");
+        sem.release(1);
     }   
 }

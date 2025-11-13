@@ -12,26 +12,28 @@ import java.util.Scanner;
  */
 public class AriketaThreads2 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
-        Mezua mezua = new Mezua();
+        int kop;
+        Mezua mezu = new Mezua();
         
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Sartu sortu nahi dituzun thread kopurua: ");
-        int kop = scanner.nextInt();
+        System.out.print("Sartu sortu nahi dituzun hari kopuruak: ");
+        kop = scanner.nextInt();
         
-        for(int i = 0; i <= kop; i++){
-            final int threadZen = i;
-            
-            Thread thread = new Thread(() -> {
-                mezua.mezuaInprimatu(threadZen);
-            });
-            
+        
+        for(int i = 0; i < kop; i++){
+            Haria h = new Haria(mezu,i);
+            Thread thread = new Thread(h);
             thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+           
         }
+       
     }
     
 }
