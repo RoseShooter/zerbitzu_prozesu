@@ -2,26 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package ariketathreads1;
+package ariketa1threadsem;
 
 /**
- * Create a class Counter that holds an integer shared among multiple threads.
- * Start 5 threads that each increment the counter 1,000 times.
- * Ensure the final result is correct using synchronized blocks or semaphores.
+ *
+ * @author mirei
  */
-public class AriketaThreads1 {
+public class Ariketa1ThreadSEM {
 
-   
-    public static void main(String[] args) throws InterruptedException{
-       
-        int zenb = 0;
+
+    public static void main(String[] args) {
+
         Counter counter = new Counter();
         
-        Hariak h1 = new Hariak(counter);
-        Hariak h2 = new Hariak(counter);
-        Hariak h3 = new Hariak(counter);
-        Hariak h4 = new Hariak(counter);
-        Hariak h5 = new Hariak(counter);
+        Haria h1 = new Haria(counter);
+        Haria h2 = new Haria(counter);
+        Haria h3 = new Haria(counter);
+        Haria h4 = new Haria(counter);
+        Haria h5 = new Haria(counter);
         
         Thread t1 = new Thread(h1);
         Thread t2 = new Thread(h2);
@@ -46,6 +44,7 @@ public class AriketaThreads1 {
         }
         
         System.out.println("Guztira: " + counter.getKontaketa());
+       
         
     }
     

@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ariketathreads1;
+package ariketa1threadsem;
+
+import java.util.concurrent.Semaphore;
 
 /**
  *
@@ -10,17 +12,17 @@ package ariketathreads1;
  */
 public class Counter {
     
-    public int kontaketa = 0;
-      
-    // Gehiketaren metodoa sortu
-    public void gehiketa(){
-        kontaketa ++;
+    private int kontaketa = 0;
+    Semaphore sem = new Semaphore(1);
+    
+    public void batuketa() throws InterruptedException{
+        sem.acquire(1);
+        kontaketa++;
+        sem.release(1);
     }
     
-    // Totala lortzeko metodoa sortu
     public int getKontaketa(){
         return kontaketa;
     }
-    
     
 }
